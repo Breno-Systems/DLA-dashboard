@@ -4,7 +4,7 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import plotly.express as px
 
-URL = "https://docs.google.com/spreadsheets/d/1b6U_Jbe1mc5YxY1rgeabUjLymTPgW_S0e6uiLlLb0Tc/export?format=csv"
+URL = st.secrets(URL_PLANILHA)
 
 @st.cache_data(ttl=300)
 def carregar_dados():
