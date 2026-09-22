@@ -3,7 +3,7 @@ import pandas as pd
 import gspread
 import plotly.express as px
 
-URL = st.secrets[URL_PLANILHA]
+URL = st.secrets["URL_PLANILHA"]
 
 @st.cache_data(ttl=300)
 def carregar_dados():
