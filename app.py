@@ -83,8 +83,7 @@ with st.sidebar:
     todas_turmas = sorted(df["Turma"].unique())
     turmas_sel = st.multiselect(
         "Turma",
-        options=todas_turmas,
-        default=todas_turmas
+        options=todas_turmas
     )
 
     data_min = df["Data"].min().date()
@@ -101,9 +100,12 @@ if len(periodo) == 2:
 else:
     inicio = fim = periodo[0]
 
-df_filtrado = df[
-    (df["Turma"].isin(turmas_sel)) & (df["Data"].dt.date >= inicio) & (df["Data"].dt.date <= fim)
-]
+if turmas_sel: 
+    df_filtrado = df[
+        (df["Turma"].isin(turmas_sel)) & (df["Data"].dt.date >= inicio) & (df["Data"].dt.date <= fim)
+    ]
+else:
+    df_filtrado = df
 
 if df_filtrado.empty:
     st.warning("Nenhum dado com esses filtros.")
