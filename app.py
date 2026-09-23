@@ -92,7 +92,7 @@ fig = px.line(
     markers=True,  # pontos visíveis
     title="Evolução do Engajamento"
 )
-fig.update_yaxes(range(0, 3.2))
+fig.update_yaxes(range(0, 3))
 
 st.subheader("Evolução do engajamento")
 st.info("gráfico")
