@@ -13,7 +13,7 @@ def carregar_dados():
 df = carregar_dados()
 
 # DF Config
-df.columns = ["data", "turma", "aulas", "engajamento"]
+df.columns = ["Data", "Turma", "Aulas", "Engajamento"]
 
 st.set_page_config(
     page_title="Dashboard de Engajamento",
