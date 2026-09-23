@@ -26,7 +26,7 @@ df.columns = ["Data", "Turma", "Aulas", "Engajamento"]
 df["Data"] = pd.to_datetime(df["Data"], dayfirst=True)
 
   # Mapeamento de Score
-df["score"] = df["Engajamento"].map({"Alto": 3, "Médio": 2, "Baixo": 1})
+df["Score"] = df["Engajamento"].map({"Alto": 3, "Médio": 2, "Baixo": 1})
 
 if df.empty:
   st.warning("⚠️ Nenhuma resposta ainda. Preencha o formulário para ver os dados.")
