@@ -114,11 +114,8 @@ if df_filtrado.empty:
 st.title("Dashboard de Engajamento")
 st.caption("Escola Estadual - Ensino Fundamental II e Ensino Médio")
 
-# Exibição Cabeçalho do DataFrame
 st.divider()
-st.dataframe(df_filtrado)
 
-st.divider()
 # Gráficos
 
 col_esq, col_dir = st.columns(2)
@@ -157,3 +154,6 @@ with col_dir:
 
 
 st.divider()
+# Exibição Cabeçalho do DataFrame
+st.divider()
+st.dataframe(df_filtrado)
