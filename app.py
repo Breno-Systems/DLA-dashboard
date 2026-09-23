@@ -106,7 +106,7 @@ fig = px.bar(
     color="Score",
     color_continuous_scale="RdYlGn",
     text_auto=".2f",
-    title="Engajamento
+    title="Comparativo de Engajamento"
 )
 fig.update_yaxes(range=[0, 3.2]
                  
