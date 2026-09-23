@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 st.set_page_config(
     page_title="Dashboard de Engajamento",
     layout="wide",
-    initial_sidebar_state="expanded",
+    initial_sidebar_state="auto",
     menu_items={"About":"Dashboard de Engajamento"}
 )
 
