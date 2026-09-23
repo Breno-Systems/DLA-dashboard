@@ -78,13 +78,13 @@ st.caption("Escola Estadual - Ensino Fundamental II e Ensino Médio")
 
 # Exibição Cabeçalho do DataFrame
 st.divider()
-st.dataframe(df)
+st.dataframe(df_filtrado)
 
 st.divider()
 # Gráficos
 
 # Evolução -> Linhas
-evolucao = df.groupby(pd.Grouper(key="Data", freq="W"))["Score"].mean().reset_index()
+evolucao = df_filtrado.groupby(pd.Grouper(key="Data", freq="W"))["Score"].mean().reset_index()
 fig = px.line(
     evolucao,
     x="Data",
@@ -98,7 +98,7 @@ st.subheader("Evolução do engajamento")
 st.plotly_chart(fig, width="stretch")
 
 # Comparativo -> Barras
-por_turma = (df.groupby("Turma")["Score"].mean().sort_values(ascending=False).reset_index())
+por_turma = (df_filtrado.groupby("Turma")["Score"].mean().sort_values(ascending=False).reset_index())
 fig = px.bar(
     por_turma,
     x="Turma",
