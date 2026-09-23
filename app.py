@@ -134,8 +134,9 @@ periodo = st.date_input(
   value=(data_min, data_max),
   min_value=data_min,
   max_value=data_max
+)
 
   if st.button("Limpar Filtros"):
-  st.rerun
-)
+      st.rerun
+
 
