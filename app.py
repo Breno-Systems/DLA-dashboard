@@ -92,14 +92,15 @@ fig = px.line(
     markers=True,  # pontos visíveis
     title="Evolução do Engajamento"
 )
-fig.update_yaxes(range(0, 3))
+fig.update_yaxes()
 
 st.subheader("Evolução do engajamento")
-st.info("gráfico")
+st.plotly_chart(fig, width="stretch")
 
 # Comparativo -> Barras
 st.subheader("Comparativo entre turmas")
-st.plotly_chart(fig, width="stretch")
+st.info("gráfico")
+
 
 st.divider()
 
