@@ -12,6 +12,9 @@ def carregar_dados():
 
 df = carregar_dados()
 
+# DF Config
+df.columns = [data, turma, aulas, engajamento]
+
 st.set_page_config(
     page_title="Dashboard de Engajamento",
     layout="wide",
@@ -22,9 +25,9 @@ st.set_page_config(
 st.title("Dashboard de Engajamento")
 st.caption("Escola Estadual - Ensino Fundamental II e Ensino Médio")
 
+# Exibição Cabeçalho do DataFrame
 st.divider()
-st.write(df.columns.tolist())
-st.write(df.head())
+st.dataframe(df)
 
 st.divider()
 
@@ -36,6 +39,7 @@ st.info("gráfico")
 
 st.divider()
 
+# Filtros
 with st.sidebar:
   st.header("Filtrar")
   st.info("Filtros")
