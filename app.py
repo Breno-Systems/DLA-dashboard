@@ -119,4 +119,23 @@ st.divider()
 # Filtros
 with st.sidebar:
   st.header("Filtrar")
-  st.info("Filtros")
+
+  todas_turmas = sorted(df["Turmas"].unique())
+  turmas_sel = st.multiselect(
+    "Turma",
+    options=todas_turmas,
+    default=todas_turmas
+  )
+
+data_min = df["Data"].min.date()
+data_max = df["Data"].max.date()
+periodo = st.date_input(
+  "Periodo",
+  value=(data_min, data_max),
+  min_value=data_min,
+  max_value=data_max
+
+  if st.button("Limpar Filtros"):
+  st.rerun
+)
+
