@@ -145,7 +145,7 @@ else:
     inicio = fim = periodo
 
 df_filtrado = df[
-    (df["Turma"].isin(turmas_sel)) & df["Data"].dt.date >= inicio) & (df["Data"].dt.date <= fim)
+    (df["Turma"].isin(turmas_sel)) & (df["Data"].dt.date >= inicio) & (df["Data"].dt.date <= fim)
 ]
 
 if df_filtrado.empty:
