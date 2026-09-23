@@ -81,10 +81,22 @@ st.divider()
 st.dataframe(df)
 
 st.divider()
+# Gráficos
+
+# Evolução -> Linhas
+evolucao = df.groupby(pd.Grouper(key="Data", freq="W"))[Score].mean().reset_index()
+fig = px.line(
+    evolucao,
+    x="Data",
+    y="Score",
+    markers=True,  # pontos visíveis
+    title="Evolução do Engajamento"
+)
 
 st.subheader("Evolução do engajamento")
 st.info("gráfico")
 
+# Comparativo -> Barras
 st.subheader("Comparativo entre turmas")
 st.info("gráfico")
 
