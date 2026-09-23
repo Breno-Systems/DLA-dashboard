@@ -16,8 +16,8 @@ URL = st.secrets["URL_PLANILHA"]
 
 @st.cache_data(ttl=300)
 def carregar_dados():
-  df = pd.read_csv(URL)
-  return df
+    df = pd.read_csv(URL)
+    return df
 
 # Temporário
 def gerar_fake(n=500):
@@ -70,8 +70,8 @@ df.insert(1, "Dia da Semana", df["Data"].dt.dayofweek.map(MAPA_DIA))
 
 
 if df.empty:
-  st.warning("⚠️ Nenhuma resposta ainda. Preencha o formulário para ver os dados.")
-  st.stop()
+    st.warning("⚠️ Nenhuma resposta ainda. Preencha o formulário para ver os dados.")
+    st.stop()
 
 st.title("Dashboard de Engajamento")
 st.caption("Escola Estadual - Ensino Fundamental II e Ensino Médio")
@@ -118,25 +118,36 @@ st.divider()
 
 # Filtros
 with st.sidebar:
-  st.header("Filtrar")
+    st.header("Filtrar")
 
-  todas_turmas = sorted(df["Turma"].unique())
-  turmas_sel = st.multiselect(
-    "Turma",
-    options=todas_turmas,
-    default=todas_turmas
-  )
+    todas_turmas = sorted(df["Turma"].unique())
+    turmas_sel = st.multiselect(
+        "Turma",
+        options=todas_turmas,
+        default=todas_turmas
+    )
 
-  data_min = df["Data"].min().date()
-  data_max = df["Data"].max().date()
-  periodo = st.date_input(
-    "Periodo",
-    value=(data_min, data_max),
-    min_value=data_min,
-    max_value=data_max
-  )
+    data_min = df["Data"].min().date()
+    data_max = df["Data"].max().date()
+    periodo = st.date_input(
+        "Periodo",
+        value=(data_min, data_max),
+        min_value=data_min,
+        max_value=data_max
+    )
 
-  if st.button("Limpar Filtros"):
-    st.rerun
+    if st.button("Limpar Filtros"):
+        st.rerun()
 
+if len(periodo) == 2:
+    inicio, fim = periodo
+else:
+    inicio = fim = periodo
 
+df_filtrado = df[
+    (df["Turma"].isin(turmas_sel)) & df["Data"].dt.date >= inicio) & (df["Data"].dt.date <= fim)
+]
+
+if df_filtrado.empty:
+    st.warning("Nenhum dado com esses filtros.")
+    st.stop()
