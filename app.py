@@ -117,7 +117,7 @@ st.caption("Escola Estadual - Ensino Fundamental II e Ensino Médio")
 st.divider()
 
 col1, col2, col3, col4 = st.columns(4)
-col1.metric("Engajamento Médio", round(df_filtrado["Score"].mean(), 2)
+col1.metric("Engajamento Médio", round(df_filtrado["Score"].mean(), 2))
 col2.metric("Total de respostas", len(df_filtrado))
 col3.metric("Turmas avaliadas", df_filtrado["Turma"].nunique())
 col4.metric("Última atualização", df_filtrado["Data"].max().strftime("%d/%m/%Y"))
