@@ -32,7 +32,7 @@ def gerar_fake(n=500):
     linhas = []
     for _ in range(n):
         data = inicio + timedelta(
-            days=random.randint(0, 500),
+            days=random.randint(0, n),
             hours=random.randint(7, 17),
             minutes=random.randint(0, 59)
         )
@@ -93,13 +93,10 @@ with st.sidebar:
         max_value=data_max
     )
 
-    if st.button("Limpar Filtros"):
-        st.rerun()
-
 if len(periodo) == 2:
     inicio, fim = periodo
 else:
-    inicio = fim = periodo
+    inicio = fim = periodo[0]
 
 df_filtrado = df[
     (df["Turma"].isin(turmas_sel)) & (df["Data"].dt.date >= inicio) & (df["Data"].dt.date <= fim)
