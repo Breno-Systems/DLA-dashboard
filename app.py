@@ -38,7 +38,7 @@ MAPA_DIA = {
     5: "Sábado",
     6: "Domingo"
 }
-df.insert(1, "Dia da Semana", df["Data"].dt.dayofweek().map(MAPA_DIA))
+df.insert(1, "Dia da Semana", df["Data"].dt.dayofweek.map(MAPA_DIA))
 
 
 if df.empty:
