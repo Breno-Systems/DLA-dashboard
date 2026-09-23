@@ -11,7 +11,7 @@ st.set_page_config(
     menu_items={"About":"Dashboard de Engajamento"}
 )
 
-
+MODO_TESTE = st.secrets["MODO_TESTE"]
 URL = st.secrets["URL_PLANILHA"]
 
 @st.cache_data(ttl=300)
@@ -45,7 +45,10 @@ def gerar_fake(n=500):
 
     return pd.DataFrame(linhas)
 
-df = gerar_fake()
+if MODO_TESTE == "On":
+    df = gerar_fake()
+else:
+    df = carregar_dados()
 
 # DF Config
 df.columns = ["Data", "Turma", "Aulas", "Engajamento"]
