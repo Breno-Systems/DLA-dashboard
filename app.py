@@ -17,7 +17,33 @@ def carregar_dados():
   df = pd.read_csv(URL)
   return df
 
-df = carregar_dados()
+# Temporário
+def gerar_fake(n=150):
+    TURMAS = ["6ºA","6ºB","6ºC","7ºA","7ºB","7ºC",
+              "8ºA","8ºB","8ºC","9ºA","9ºB","9ºC"]
+    AULAS = ["1ª, 2ª", "3ª, 4ª", "5ª, 6ª", "7ª"]
+    NOTAS = ["Alto", "Médio", "Baixo"]
+
+    random.seed(42)
+    inicio = datetime(2026, 8, 1)
+
+    linhas = []
+    for _ in range(n):
+        data = inicio + timedelta(
+            days=random.randint(0, 50),
+            hours=random.randint(7, 17),
+            minutes=random.randint(0, 59)
+        )
+        linhas.append({
+            "Data": data,
+            "Turma": random.choice(TURMAS),
+            "Aulas": random.choice(AULAS),
+            "Engajamento": random.choice(NOTAS)
+        })
+
+    return pd.DataFrame(linhas)
+
+df = gerar_fake()
 
 # DF Config
 df.columns = ["Data", "Turma", "Aulas", "Engajamento"]
