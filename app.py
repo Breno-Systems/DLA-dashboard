@@ -98,8 +98,20 @@ st.subheader("Evolução do engajamento")
 st.plotly_chart(fig, width="stretch")
 
 # Comparativo -> Barras
+por_turma = (df.groupby("Turma")["Score"].mean().sort_values(ascending=False).reset_index())
+fig = px.bar(
+    por_turma,
+    x="Turma",
+    y="Score",
+    color="Score",
+    color_continuous_scale="RdYlGn",
+    text_auto=".2f",
+    title="Engajamento
+)
+fig.update_yaxes(range=[0, 3.2]
+                 
 st.subheader("Comparativo entre turmas")
-st.info("gráfico")
+st.ploty_bar(fig, width="stretch")
 
 
 st.divider()
