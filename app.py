@@ -84,7 +84,7 @@ st.divider()
 # Gráficos
 
 # Evolução -> Linhas
-evolucao = df.groupby(pd.Grouper(key="Data", freq="W"))[Score].mean().reset_index()
+evolucao = df.groupby(pd.Grouper(key="Data", freq="W"))["Score"].mean().reset_index()
 fig = px.line(
     evolucao,
     x="Data",
