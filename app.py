@@ -32,7 +32,7 @@ def gerar_fake(n=500):
     linhas = []
     for _ in range(n):
         data = inicio + timedelta(
-            days=random.randint(0, 9000),
+            days=random.randint(0, 500),
             hours=random.randint(7, 17),
             minutes=random.randint(0, 59)
         )
