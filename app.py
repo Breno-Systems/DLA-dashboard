@@ -120,15 +120,15 @@ st.divider()
 with st.sidebar:
   st.header("Filtrar")
 
-  todas_turmas = sorted(df["Turmas"].unique())
+  todas_turmas = sorted(df["Turma"].unique())
   turmas_sel = st.multiselect(
     "Turma",
     options=todas_turmas,
     default=todas_turmas
   )
 
-  data_min = df["Data"].min.date()
-  data_max = df["Data"].max.date()
+  data_min = df["Data"].min().date()
+  data_max = df["Data"].max().date()
   periodo = st.date_input(
     "Periodo",
     value=(data_min, data_max),
