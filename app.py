@@ -78,7 +78,7 @@ if df.empty:
 
 # Filtros
 with st.sidebar:
-    st.header("Filtrar")
+    st.header("Filtros:")
 
     todas_turmas = sorted(df["Turma"].unique())
     turmas_sel = st.multiselect(
