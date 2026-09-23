@@ -27,7 +27,7 @@ def gerar_fake(n=500):
     NOTAS = ["Alto", "Médio", "Baixo"]
 
     random.seed(42)
-    inicio = datetime(2020, 1, 1)
+    inicio = datetime.now() - timedelta(days=n)
 
     linhas = []
     for _ in range(n):
