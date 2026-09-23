@@ -108,7 +108,7 @@ fig = px.bar(
     text_auto=".2f",
     title="Comparativo de Engajamento"
 )
-fig.update_yaxes(range=[0, 3.2]
+fig.update_yaxes(range=[0, 3.2])
                  
 st.subheader("Comparativo entre turmas")
 st.ploty_bar(fig, width="stretch")
