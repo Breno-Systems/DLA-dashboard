@@ -10,7 +10,6 @@ st.set_page_config(
     initial_sidebar_state="auto",
     menu_items={"About":"Dashboard de Engajamento"}
 )
-st.logo("assets/logo.png", size="large")
 
 MODO_TESTE = st.secrets["MODO_TESTE"]
 URL = st.secrets["URL_PLANILHA"]
@@ -85,6 +84,11 @@ if df.empty:
 
 # Filtros
 with st.sidebar:
+
+    st.image("assets/logo.png", width=180)
+    
+    st.divider()
+    
     st.header("Filtros:")
 
     todas_turmas = sorted(df["Turma"].unique())
