@@ -100,7 +100,9 @@ if turmas_sel:
         (df["Turma"].isin(turmas_sel)) & (df["Data"].dt.date >= inicio) & (df["Data"].dt.date <= fim)
     ]
 else:
-    df_filtrado = df
+    df_filtrado = df[
+        (df["Data"].dt.date >= inicio) & (df["Data"].df.date <= fim)
+    ]
 
 if df_filtrado.empty:
     st.warning("Nenhum dado com esses filtros.")
@@ -156,6 +158,6 @@ with col_dir:
 
 
 st.divider()
+
 # Exibição Cabeçalho do DataFrame
-st.divider()
 st.dataframe(df_filtrado)
