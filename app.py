@@ -88,17 +88,12 @@ with st.sidebar:
 
     data_min = df["Data"].min().date()
     data_max = df["Data"].max().date()
-    periodo = st.date_input(
+    inicio, fim = st.slider(
         "Periodo",
         value=(data_min, data_max),
         min_value=data_min,
         max_value=data_max
     )
-
-if len(periodo) == 2:
-    inicio, fim = periodo
-else:
-    inicio = fim = periodo[0]
 
 if turmas_sel: 
     df_filtrado = df[
