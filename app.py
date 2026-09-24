@@ -84,8 +84,9 @@ if df.empty:
 
 # Filtros
 with st.sidebar:
-
-    st.image("assets/logo.png", width=180)
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        st.image("assets/logo.png", width=130)
     
     st.divider()
     
