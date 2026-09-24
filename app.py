@@ -159,6 +159,28 @@ with col_esq:
     st.subheader("Evolução do engajamento")
     st.plotly_chart(fig, width="stretch")
 
+    por_dia = (
+        df_filtrado.groupby("Dia da Semana")["Score"]
+        .mean()
+        .reindex(["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"])
+        .reset_index()
+    )
+
+    fig = px_bar(
+        por_dia,
+        x="Dia da Semana",
+        y="Score",
+        color="Score",
+        color_continuous_scale="RdYlGn",
+        text_auto=".2f",
+        title="Engajamento por dia da semana"
+    )
+    fig.update_yaxes(range=[0,3.2])
+    fig.update_layout(dragmode="pan")
+
+    st.subheader("Engajamento por Dia da Semana")
+    st.plotly_chart(fig, width="stretch")
+
 with col_dir:
     # Comparativo -> Barras
     por_turma = (df_filtrado.groupby("Turma")["Score"].mean().sort_values(ascending=False).reset_index())
