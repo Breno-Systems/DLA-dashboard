@@ -131,7 +131,7 @@ col_esq, col_dir = st.columns(2)
 
 with col_esq:
     # Evolução -> Linhas
-    evolucao = df_filtrado.groupby(pd.Grouper(key="Data", freq="D"))["Score"].mean().reset_index()
+    evolucao = df_filtrado.groupby(pd.Grouper(key="Data", freq="M"))["Score"].mean().reset_index()
     fig = px.line(
         evolucao,
         x="Data",
