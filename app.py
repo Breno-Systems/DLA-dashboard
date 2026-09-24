@@ -113,7 +113,7 @@ st.title("Dashboard de Engajamento")
 
 caption = "Escola Estadual - Ensino Fundamental II e Ensino Médio"
 if len(df_filtrado) < len(df):
-    caption += f" · 🔍 Filtrado: {len(df_filtrado)}/{len(df)}"
+    caption += f"  · 🔍 Filtrado: {len(df_filtrado)}/{len(df)}"
 st.caption(caption)
 
 st.divider()
