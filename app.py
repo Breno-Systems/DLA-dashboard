@@ -21,8 +21,8 @@ def carregar_dados():
 
 # Temporário
 def gerar_fake(n=500):
-    TURMAS = ["6ºA","6ºB","6ºC","7ºA","7ºB","7ºC",
-              "8ºA","8ºB","8ºC","9ºA","9ºB","9ºC"]
+    TURMAS = ["6º A","6º B","6º C","7º A","7º B","7º C",
+              "8º A","8º B","8º C","9º A","9º B","9º C", "1ª A", "1ª B", "2ª ADM", "2ª B", "3ª A", "3ª ADM"]
     AULAS = ["1ª", "2ª", "3ª", "4ª", "5ª", "6ª", "7ª"]
     NOTAS = ["Alto", "Médio", "Baixo"]
 
