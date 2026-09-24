@@ -84,6 +84,7 @@ if df.empty:
 
 # Filtros
 with st.sidebar:
+    st.image("assets/logo.png", width="stretch")
     st.header("Filtros:")
 
     todas_turmas = sorted(df["Turma"].unique())
@@ -115,7 +116,6 @@ if df_filtrado.empty:
     st.warning("Nenhum dado com esses filtros.")
     st.stop()
 
-st.logo("assets/logo.png", size="large", icon_image="assets/logo.png")
 st.title("Dashboard de Engajamento")
 
 caption = "Escola Estadual - Ensino Fundamental II e Ensino Médio"
