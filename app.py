@@ -23,7 +23,7 @@ def carregar_dados():
 def gerar_fake(n=500):
     TURMAS = ["6ºA","6ºB","6ºC","7ºA","7ºB","7ºC",
               "8ºA","8ºB","8ºC","9ºA","9ºB","9ºC"]
-    AULAS = ["1ª, 2ª", "3ª, 4ª", "5ª, 6ª", "7ª"]
+    AULAS = ["1ª", "2ª", "3ª", "4ª", "5ª", "6ª", "7ª"]
     NOTAS = ["Alto", "Médio", "Baixo"]
 
     random.seed(42)
