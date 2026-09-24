@@ -172,8 +172,10 @@ st.divider()
 
 # Dados Brutos em Tabela (colapsado)
 with st.expander ("📋 Ver dados brutos"):
+        df_view = df_filtrado.sort_values("Data", ascending=False).copy()
+        df_view["Data"] = df_view["Data"].dt.strftime("%d/%m/%Y")
     st.dataframe(
-        df_filtrado.sort_values("Data", ascending=False),
+        df_view,
         height=300,
         hide_index=True
     )
