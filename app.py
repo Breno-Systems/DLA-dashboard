@@ -92,7 +92,8 @@ with st.sidebar:
         "Periodo",
         value=(data_min, data_max),
         min_value=data_min,
-        max_value=data_max
+        max_value=data_max,
+        format="DD/MM/YYYY"
     )
 
 if turmas_sel: 
@@ -160,4 +161,5 @@ with col_dir:
 st.divider()
 
 # Exibição Cabeçalho do DataFrame
-st.dataframe(df_filtrado)
+with st.expander ("Ver dados brutos"
+    st.dataframe(df_filtrado, height=300)
