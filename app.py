@@ -101,7 +101,7 @@ if turmas_sel:
     ]
 else:
     df_filtrado = df[
-        (df["Data"].dt.date >= inicio) & (df["Data"].df.date <= fim)
+        (df["Data"].dt.date >= inicio) & (df["Data"].dt.date <= fim)
     ]
 
 if df_filtrado.empty:
