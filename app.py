@@ -136,6 +136,9 @@ with col_esq:
         title="Evolução do Engajamento"
     )
     fig.update_yaxes(range=[0, 3.2])
+    fig.update_layout(
+        dragmode="pan"
+    )
     
     st.subheader("Evolução do engajamento")
     st.plotly_chart(fig, width="stretch")
@@ -153,8 +156,11 @@ with col_dir:
         title="Comparativo de Engajamento"
     )
     fig.update_yaxes(range=[0, 3.2])
-                     
-    st.subheader("Comparativo entre turmas")
+        fig.update_layout(
+        dragmode="pan"
+    )
+    
+st.subheader("Comparativo entre turmas")
     st.plotly_chart(fig, width="stretch")
 
 
