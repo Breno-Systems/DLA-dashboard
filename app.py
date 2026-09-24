@@ -20,10 +20,6 @@ def colorir(nota):
              "Baixo": "background-color: #E53935; color: white"}
     return cores.get(nota, "")
 
-st.dataframe(
-    df_view.style.map(colorir, subset=["Engajamento"]),
-    height=300
-)
 @st.cache_data(ttl=300)
 def carregar_dados():
     df = pd.read_csv(URL)
@@ -123,7 +119,7 @@ st.title("Dashboard de Engajamento")
 
 caption = "Escola Estadual - Ensino Fundamental II e Ensino Médio"
 if len(df_filtrado) < len(df):
-    caption += f"  · 🔍 Filtrado: {len(df_filtrado)}/{len(df)}"
+    caption += f" · 🔍 Filtrado: {len(df_filtrado)}/{len(df)}"
 st.caption(caption)
 
 st.divider()
@@ -187,7 +183,7 @@ with st.expander ("📋 Ver dados brutos"):
     df_view = df_filtrado.sort_values("Data", ascending=False).copy()
     df_view["Data"] = df_view["Data"].dt.strftime("%d/%m/%Y")
     df_view = df_view.reset_index(drop=True)
-    styled = (df_view.style.map(colorir, subset=["Engajamento"]).hide(axis="index")),
+    styled = (df_view.style.map(colorir, subset=["Engajamento"]).hide(axis="index"))
     st.dataframe(
         styled,
         height=300
