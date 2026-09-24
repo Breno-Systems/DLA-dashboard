@@ -161,5 +161,5 @@ with col_dir:
 st.divider()
 
 # Exibição Cabeçalho do DataFrame
-with st.expander ("Ver dados brutos"
+with st.expander ("Ver dados brutos")
     st.dataframe(df_filtrado, height=300)
