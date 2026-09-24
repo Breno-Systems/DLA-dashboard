@@ -14,6 +14,16 @@ st.set_page_config(
 MODO_TESTE = st.secrets["MODO_TESTE"]
 URL = st.secrets["URL_PLANILHA"]
 
+def colorir(nota):
+    cores = {"Alto": "background-color: #4CAF50; color: white",
+             "Médio": "background-color: #FFC107; color: black",
+             "Baixo": "background-color: #E53935; color: white"}
+    return cores.get(nota, "")
+
+st.dataframe(
+    df_view.style.map(colorir, subset=["Engajamento"]),
+    height=300
+)
 @st.cache_data(ttl=300)
 def carregar_dados():
     df = pd.read_csv(URL)
@@ -170,12 +180,21 @@ with col_dir:
 
 st.divider()
 
+
+
 # Dados Brutos em Tabela (colapsado)
 with st.expander ("📋 Ver dados brutos"):
-        df_view = df_filtrado.sort_values("Data", ascending=False).copy()
-        df_view["Data"] = df_view["Data"].dt.strftime("%d/%m/%Y")
+    df_view = df_filtrado.sort_values("Data", ascending=False).copy()
+    df_view["Data"] = df_view["Data"].dt.strftime("%d/%m/%Y")
+    df_view.reset_index(drop=True))
     st.dataframe(
-        df_view,
+        df_view.style.map(colorir, subset=["Engajamento"]),
         height=300,
         hide_index=True
     )
+
+
+
+
+
+
