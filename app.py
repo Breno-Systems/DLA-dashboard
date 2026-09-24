@@ -65,16 +65,6 @@ df["Data"] = pd.to_datetime(df["Data"], dayfirst=True)
       # Mapeamento de Score
 df["Score"] = df["Engajamento"].map({"Alto": 3, "Médio": 2, "Baixo": 1})
 
-      # Cálculo da coluna "Dia da Semana"
-MAPA_DIA = {
-    0: "Segunda",
-    1: "Terça",
-    2: "Quarta",
-    3: "Quinta",
-    4: "Sexta",
-    5: "Sábado",
-    6: "Domingo"
-}
 df.insert(1, "Dia da Semana", df["Data"].dt.dayofweek.map(MAPA_DIA))
 
 
