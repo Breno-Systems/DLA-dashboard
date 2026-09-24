@@ -156,7 +156,7 @@ with col_dir:
         title="Comparativo de Engajamento"
     )
     fig.update_yaxes(range=[0, 3.2])
-        fig.update_layout(
+    fig.update_layout(
         dragmode="pan"
     )
     
