@@ -115,7 +115,7 @@ if df_filtrado.empty:
     st.warning("Nenhum dado com esses filtros.")
     st.stop()
 
-st.logo("assets/logo_dla.png", icon_image="assets/logo_dla.png")
+st.logo("assets/logo.png", size="large", icon_image="assets/logo.png")
 st.title("Dashboard de Engajamento")
 
 caption = "Escola Estadual - Ensino Fundamental II e Ensino Médio"
