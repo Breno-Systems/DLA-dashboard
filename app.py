@@ -163,6 +163,7 @@ with col_esq:
         df_filtrado.groupby("Dia da Semana")["Score"]
         .mean()
         .reindex(["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"])
+        .dropna()
         .reset_index()
     )
 
