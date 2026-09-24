@@ -160,7 +160,7 @@ with col_dir:
         dragmode="pan"
     )
     
-st.subheader("Comparativo entre turmas")
+    st.subheader("Comparativo entre turmas")
     st.plotly_chart(fig, width="stretch")
 
 
