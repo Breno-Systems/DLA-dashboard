@@ -172,4 +172,7 @@ st.divider()
 
 # Dados Brutos em Tabela (colapsado)
 with st.expander ("📋 Ver dados brutos"):
-    st.dataframe(df_filtrado, height=300)
+    st.dataframe(
+        df_filtrado.sort_values("Data", ascending=False),
+        height=300
+    )
