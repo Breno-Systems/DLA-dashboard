@@ -187,10 +187,10 @@ with st.expander ("📋 Ver dados brutos"):
     df_view = df_filtrado.sort_values("Data", ascending=False).copy()
     df_view["Data"] = df_view["Data"].dt.strftime("%d/%m/%Y")
     df_view = df_view.reset_index(drop=True)
+    styled = (df_view.style.map(colorir, subset=["Engajamento"]).hide(axis="index"),
     st.dataframe(
-        df_view.style.map(colorir, subset=["Engajamento"]),
-        height=300,
-        hide_index=True
+        styled,
+        height=300
     )
 
 
