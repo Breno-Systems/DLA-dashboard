@@ -59,7 +59,7 @@ df["Data"] = pd.to_datetime(df["Data"], dayfirst=True)
       # Mapeamento de Score
 df["Score"] = df["Engajamento"].map({"Alto": 3, "Médio": 2, "Baixo": 1})
 
-      # Cálculo da colina "Dia da Semana"
+      # Cálculo da coluna "Dia da Semana"
 MAPA_DIA = {
     0: "Segunda",
     1: "Terça",
@@ -166,6 +166,6 @@ with col_dir:
 
 st.divider()
 
-# Exibição Cabeçalho do DataFrame
-with st.expander ("Ver dados brutos"):
+# Dados Brutos em Tabela (colapsado)
+with st.expander ("📋 Ver dados brutos"):
     st.dataframe(df_filtrado, height=300)
