@@ -166,7 +166,7 @@ with col_esq:
         .reset_index()
     )
 
-    fig = px_bar(
+    fig = px.bar(
         por_dia,
         x="Dia da Semana",
         y="Score",
