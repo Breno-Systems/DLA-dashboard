@@ -84,6 +84,7 @@ if df.empty:
 
 # Filtros
 with st.sidebar:
+    st.logo("assets/logo_dla.png")
     st.header("Filtros:")
 
     todas_turmas = sorted(df["Turma"].unique())
