@@ -1,8 +1,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-import random
-from datetime import datetime, timedelta
+from utils.dados import obter_dados, colorir_engajamento
 
 st.set_page_config(
     page_title="Dashboard de Engajamento",
@@ -10,67 +9,6 @@ st.set_page_config(
     initial_sidebar_state="auto",
     menu_items={"About":"Dashboard de Engajamento"}
 )
-
-MODO_TESTE = st.secrets["MODO_TESTE"]
-URL = st.secrets["URL_PLANILHA"]
-
-def colorir(nota):
-    cores = {"Alto": "background-color: #4CAF50; color: white",
-             "Médio": "background-color: #FFC107; color: black",
-             "Baixo": "background-color: #E53935; color: white"}
-    return cores.get(nota, "")
-
-@st.cache_data(ttl=300)
-def carregar_dados():
-    df = pd.read_csv(URL)
-    return df
-
-# Temporário
-def gerar_fake(n=500):
-    TURMAS = ["6ºA","6ºB","6ºC","7ºA","7ºB","7ºC",
-              "8ºA","8ºB","8ºC","9ºA","9ºB","9ºC", "1ªA", "1ªB", "2ªADM", "2ªB", "3ªA", "3ªADM"]
-    AULAS = ["1ª", "2ª", "3ª", "4ª", "5ª", "6ª", "7ª"]
-    NOTAS = ["Alto", "Médio", "Baixo"]
-
-    random.seed(42)
-    inicio = datetime.now() - timedelta(days=n)
-
-    linhas = []
-    for _ in range(n):
-        data = inicio + timedelta(
-            days=random.randint(0, n),
-            hours=random.randint(7, 17),
-            minutes=random.randint(0, 59)
-        )
-        linhas.append({
-            "Data": data,
-            "Turma": random.choice(TURMAS),
-            "Aulas": random.choice(AULAS),
-            "Engajamento": random.choice(NOTAS)
-        })
-
-    return pd.DataFrame(linhas)
-
-if MODO_TESTE == "On":
-    df = gerar_fake()
-else:
-    df = carregar_dados()
-
-# DF Config
-df.columns = ["Data", "Turma", "Aulas", "Engajamento"]
-
-      # Data -> Datetime
-df["Data"] = pd.to_datetime(df["Data"], dayfirst=True)
-
-      # Mapeamento de Score
-df["Score"] = df["Engajamento"].map({"Alto": 3, "Médio": 2, "Baixo": 1})
-
-df.insert(1, "Dia da Semana", df["Data"].dt.dayofweek.map(MAPA_DIA))
-
-
-if df.empty:
-    st.warning("⚠️ Nenhuma resposta ainda. Preencha o formulário para ver os dados.")
-    st.stop()
 
 # Filtros
 with st.sidebar:
