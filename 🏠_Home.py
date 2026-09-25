@@ -148,9 +148,3 @@ with st.expander ("📋 Ver dados brutos"):
         styled,
         height=300
     )
-
-
-
-
-
-

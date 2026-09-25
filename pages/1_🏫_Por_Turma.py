@@ -11,6 +11,11 @@ st.set_page_config(
 
 st.logo("assets/logo.png")
 
+with st.sidebar:
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        st.image("assets/logo.png", width=110)
+
 # -------------------- DADOS --------------------
 df = obter_dados()
 if df.empty:
@@ -25,4 +30,26 @@ turma_sel = st.selectbox("Escolha a turma: ", todas_turmas)
 
 df_turma = df[df["Turma"] == turma_sel]
 
-# -------------------- Continua --------------------
+# -------------------- MÉTRICAS --------------------
+
+col1, col2, col3, col4 = st.columns(4)
+col1.metric("Engajamento Médio", round(df_turma["Score"].mean(), 2))
+col2.metric("Total de respostas", len(df_turma))
+col3.metric("Aulas avaliadas", df_turma["Aulas"].nunique())
+col4.metric("Última atualização", df_turma["Data"].max().strftime("%d/%m/%Y"))
+
+# -------------------- CORPO DE GRÁFICOS --------------------
+
+
+
+# ------------------ DADOS BRUTOS DA TURMA ------------------
+
+with st.expander ("📋 Ver dados brutos"):
+    df_view = df_turma.sort_values("Data", ascending=False).copy()
+    df_view["Data"] = df_view["Data"].dt.strftime("%d/%m/%Y")
+    df_view = df_view.reset_index(drop=True)
+    styled = (df_view.style.map(colorir_engajamento, subset=["Engajamento"]).hide(axis="index"))
+    st.dataframe(
+        styled,
+        height=300
+    )
