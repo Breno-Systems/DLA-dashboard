@@ -10,6 +10,8 @@ st.set_page_config(
     menu_items={"About":"Dashboard de Engajamento"}
 )
 
+df = obter_dados()
+
 # Filtros
 with st.sidebar:
     col1, col2, col3 = st.columns([1, 2, 1])
