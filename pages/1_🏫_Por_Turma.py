@@ -49,7 +49,7 @@ col_esq, col_dir = st.columns(2)
 
 with col_esq:
     # Evolução -> Linhas
-    evolucao = df_turma(pd.Grouper(key="Data", freq="W"))["Score"].mean().reset_index()
+    evolucao = df_turma.groupby(pd.Grouper(key="Data", freq="W"))["Score"].mean().reset_index()
     fig = px.line(
         evolucao,
         x="Data",
@@ -90,10 +90,11 @@ with col_esq:
 
 with col_dir:
     # Comparativo -> Barras
-    por_aula = (df_turma.groupby("Aulas")["Score"].mean().sort_values(ascending=False).reset_index())
+    ORDEM_AULAS = ["1ª", "2ª", "3ª", "4ª", "5ª", "6ª", "7ª"]
+    por_aula = (df_turma.groupby("Aulas")["Score"].mean().sort_values(ascending=False).reset_index(ORDEM_AULAS))
     fig = px.bar(
         por_aula,
-        x="Turma",
+        x="Aulas",
         y="Score",
         color="Score",
         color_continuous_scale="RdYlGn",
@@ -105,7 +106,7 @@ with col_dir:
         dragmode="pan"
     )
     
-    st.subheader("Comparativo entre turmas")
+    st.subheader("Comparativo entre aulas")
     st.plotly_chart(fig, width="stretch")
 
 

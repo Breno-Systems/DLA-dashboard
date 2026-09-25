@@ -13,6 +13,7 @@ MAPA_DIA = {
 MAPA_SCORE = {"Alto": 3, "Médio": 2, "Baixo": 1}
 
 ORDEM_DIAS = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"]
+ORDEM_AULAS = ["1ª", "2ª", "3ª", "4ª", "5ª", "6ª", "7ª"]
 
 
 # ---------- CARREGAR DADOS REAIS ----------
