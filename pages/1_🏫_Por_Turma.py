@@ -17,7 +17,7 @@ if df.empty:
     st.warning("Nenhum dado com esses filtros.")
     st.stop()
 
-st,title("Análise por Turma")
+st.title("Análise por Turma")
 st.caption("Mergulhe nos dados de uma turma específica")
 
 todas_turmas = sorted(df["Turma"].unique())
