@@ -91,7 +91,7 @@ with col_esq:
 with col_dir:
     # Comparativo -> Barras
     ORDEM_AULAS = ["1ª", "2ª", "3ª", "4ª", "5ª", "6ª", "7ª"]
-    por_aula = (df_turma.groupby("Aulas")["Score"].mean().sort_values(ascending=False).reset_index(ORDEM_AULAS))
+    por_aula = (df_turma.groupby("Aulas")["Score"].mean().reindex(ORDEM_AULAS).reset_index())
     fig = px.bar(
         por_aula,
         x="Aulas",
