@@ -45,6 +45,69 @@ col4.metric("Última atualização", df_turma["Data"].max().strftime("%d/%m/%Y")
 st.divider()
 # -------------------- CORPO DE GRÁFICOS --------------------
 
+col_esq, col_dir = st.columns(2)
+
+with col_esq:
+    # Evolução -> Linhas
+    evolucao = df_turma(pd.Grouper(key="Data", freq="W"))["Score"].mean().reset_index()
+    fig = px.line(
+        evolucao,
+        x="Data",
+        y="Score",
+        markers=True,  # pontos visíveis
+        title="Evolução do Engajamento"
+    )
+    fig.update_yaxes(range=[0, 3.2])
+    fig.update_layout(
+        dragmode="pan"
+    )
+    
+    st.subheader("Evolução do engajamento")
+    st.plotly_chart(fig, width="stretch")
+
+    por_dia = (
+        df_turma.groupby("Dia da Semana")["Score"]
+        .mean()
+        .reindex(["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"])
+        .dropna()
+        .reset_index()
+    )
+
+    fig = px.bar(
+        por_dia,
+        x="Dia da Semana",
+        y="Score",
+        color="Score",
+        color_continuous_scale="RdYlGn",
+        text_auto=".2f",
+        title="Engajamento por dia da semana"
+    )
+    fig.update_yaxes(range=[0,3.2])
+    fig.update_layout(dragmode="pan")
+
+    st.subheader("Engajamento por Dia da Semana")
+    st.plotly_chart(fig, width="stretch")
+
+with col_dir:
+    # Comparativo -> Barras
+    por_aula = (df_turma.groupby("Aulas")["Score"].mean().sort_values(ascending=False).reset_index())
+    fig = px.bar(
+        por_aula,
+        x="Turma",
+        y="Score",
+        color="Score",
+        color_continuous_scale="RdYlGn",
+        text_auto=".2f",
+        title="Comparativo de Engajamento"
+    )
+    fig.update_yaxes(range=[0, 3.2])
+    fig.update_layout(
+        dragmode="pan"
+    )
+    
+    st.subheader("Comparativo entre turmas")
+    st.plotly_chart(fig, width="stretch")
+
 
 
 st.divider()
