@@ -26,10 +26,14 @@ st.title("Análise por Turma")
 st.caption("Mergulhe nos dados de uma turma específica")
 
 todas_turmas = sorted(df["Turma"].unique())
-turma_sel = st.selectbox("Escolha a turma: ", todas_turmas)
+turma_sel = st.selectbox("Escolha a turma: ", todas_turmas, index=None, placeholder="Selecione uma turma...")
+if turma_sel == None:
+    st.info("👆 Selecione uma turma para ver os dados.")
+    st.stop()
 
 df_turma = df[df["Turma"] == turma_sel]
 
+st.divider()
 # -------------------- MÉTRICAS --------------------
 
 col1, col2, col3, col4 = st.columns(4)
@@ -38,10 +42,12 @@ col2.metric("Total de respostas", len(df_turma))
 col3.metric("Aulas avaliadas", df_turma["Aulas"].nunique())
 col4.metric("Última atualização", df_turma["Data"].max().strftime("%d/%m/%Y"))
 
+st.divider()
 # -------------------- CORPO DE GRÁFICOS --------------------
 
 
 
+st.divider()
 # ------------------ DADOS BRUTOS DA TURMA ------------------
 
 with st.expander ("📋 Ver dados brutos"):
