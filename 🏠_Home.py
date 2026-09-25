@@ -5,6 +5,7 @@ from utils.dados import obter_dados, colorir_engajamento
 
 st.set_page_config(
     page_title="Dashboard de Engajamento",
+    page_icon = "🏠",
     layout="wide",
     initial_sidebar_state="auto",
     menu_items={"About":"Dashboard de Engajamento"}
