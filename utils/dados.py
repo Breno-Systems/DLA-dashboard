@@ -63,7 +63,7 @@ def tratar(df):
 # ---------- CARREGAR + TRATAR (função única) ----------
 def obter_dados():
     """Decide entre fake/real e já aplica o tratamento."""
-    if st.secrets.get("MODO_TESTE", "Off") == "On":
+    if st.secrets.get("MODO_TESTE") == "On":
         df = gerar_fake()
     else:
         df = carregar_dados()
