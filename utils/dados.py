@@ -68,11 +68,6 @@ def obter_dados():
         return tratar(df)
     else:
         df = carregar_dados()
-        st.write("🔍 Colunas cruas da planilha:", df.columns.tolist())
-        st.write("🔍 Shape:", df.shape)
-        st.write("🔍 Primeiras linhas:")
-        st.write(df.head())
-        st.stop()
         return tratar(df)
 
 
