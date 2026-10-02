@@ -61,13 +61,19 @@ def tratar(df):
 
 
 # ---------- CARREGAR + TRATAR (função única) ----------
+
 def obter_dados():
-    """Decide entre fake/real e já aplica o tratamento."""
     if st.secrets.get("MODO_TESTE") == "On":
         df = gerar_fake()
+        return tratar(df)
     else:
         df = carregar_dados()
-    return tratar(df)
+        st.write("🔍 Colunas cruas da planilha:", df.columns.tolist())
+        st.write("🔍 Shape:", df.shape)
+        st.write("🔍 Primeiras linhas:")
+        st.write(df.head())
+        st.stop()
+        return tratar(df)
 
 
 # ---------- UTILITÁRIOS DE VISUAL ----------
