@@ -13,6 +13,10 @@ st.set_page_config(
 
 df = obter_dados()
 
+if df.empty:
+    st.warning("Nenhum dado cadastrado ainda")
+    st.stop()
+
 # Filtros
 with st.sidebar:
     col1, col2, col3 = st.columns([1, 2, 1])
@@ -31,6 +35,11 @@ with st.sidebar:
 
     data_min = df["Data"].min().date()
     data_max = df["Data"].max().date()
+    if data_min == data_max:
+        from datetime import timedelta
+        data_min = data_min - timedelta(days=1)
+        data_max = data_max + timedelta(days=1)
+
     inicio, fim = st.slider(
         "Periodo",
         value=(data_min, data_max),
