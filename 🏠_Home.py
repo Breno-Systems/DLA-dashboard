@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 from utils.dados import obter_dados, colorir_engajamento
+from utils.graficos import grafico_evolucao
 
 st.set_page_config(
     page_title="Dashboard de Engajamento",
@@ -83,18 +84,7 @@ col_esq, col_dir = st.columns(2)
 
 with col_esq:
     # Evolução -> Linhas
-    evolucao = df_filtrado.groupby(pd.Grouper(key="Data", freq="W"))["Score"].mean().reset_index()
-    fig = px.line(
-        evolucao,
-        x="Data",
-        y="Score",
-        markers=True,  # pontos visíveis
-        title="Evolução do Engajamento"
-    )
-    fig.update_yaxes(range=[0, 3.2])
-    fig.update_layout(
-        dragmode="pan"
-    )
+    fig = grafico_evolucao(df_filtrado)
     
     st.subheader("Evolução do engajamento")
     st.plotly_chart(fig, width="stretch")
