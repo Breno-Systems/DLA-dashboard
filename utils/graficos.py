@@ -1,6 +1,6 @@
 import plotly.express as px
-import streamlit as st
 import pandas as pd
+from utils.dados import ORDEM_AULAS
 
 def grafico_evolucao(df):
     evolucao = df.groupby(pd.Grouper(key="Data", freq="W"))["Score"].mean().reset_index()
@@ -54,4 +54,22 @@ def grafico_por_turma(df):
     fig.update_layout(
         dragmode="pan"
     )
+    return fig
+
+def grafico_por_aula(df):
+    por_aula = (df_turma.groupby("Aulas")["Score"].mean().reindex(ORDEM_AULAS).reset_index())
+    fig = px.bar(
+        por_aula,
+        x="Aulas",
+        y="Score",
+        color="Score",
+        color_continuous_scale="RdYlGn",
+        text_auto=".2f",
+        title="Comparativo de Engajamento"
+    )
+    fig.update_yaxes(range=[0, 3.2])
+    fig.update_layout(
+        dragmode="pan"
+    )
+
     return fig
