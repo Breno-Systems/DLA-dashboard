@@ -1,5 +1,4 @@
 import streamlit as st
-import pandas as pd
 import plotly.express as px
 from utils.dados import obter_dados, colorir_engajamento
 from utils.graficos import grafico_evolucao, grafico_por_dia, grafico_por_turma
