@@ -57,7 +57,7 @@ def grafico_por_turma(df):
     return fig
 
 def grafico_por_aula(df):
-    por_aula = (df_turma.groupby("Aulas")["Score"].mean().reindex(ORDEM_AULAS).reset_index())
+    por_aula = (df.groupby("Aulas")["Score"].mean().reindex(ORDEM_AULAS).reset_index())
     fig = px.bar(
         por_aula,
         x="Aulas",
