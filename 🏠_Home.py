@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 from utils.dados import obter_dados, colorir_engajamento
-from utils.graficos import grafico_evolucao
+from utils.graficos import grafico_evolucao, grafico_por_dia, grafico_por_turma
 
 st.set_page_config(
     page_title="Dashboard de Engajamento",
@@ -83,52 +83,22 @@ st.divider()
 col_esq, col_dir = st.columns(2)
 
 with col_esq:
-    # Evolução -> Linhas
+    # Evolução -> Linhas (Gráfico 1)
     fig = grafico_evolucao(df_filtrado)
     
     st.subheader("Evolução do engajamento")
     st.plotly_chart(fig, width="stretch")
 
-    por_dia = (
-        df_filtrado.groupby("Dia da Semana")["Score"]
-        .mean()
-        .reindex(["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"])
-        .dropna()
-        .reset_index()
-    )
-
-    fig = px.bar(
-        por_dia,
-        x="Dia da Semana",
-        y="Score",
-        color="Score",
-        color_continuous_scale="RdYlGn",
-        text_auto=".2f",
-        title="Engajamento por dia da semana"
-    )
-    fig.update_yaxes(range=[0,3.2])
-    fig.update_layout(dragmode="pan")
+    # Por dia -> Barras (Gráfico 3)
+    fig = grafico_por_dia(df_filtrado)
 
     st.subheader("Engajamento por Dia da Semana")
     st.plotly_chart(fig, width="stretch")
 
 with col_dir:
-    # Comparativo -> Barras
-    por_turma = (df_filtrado.groupby("Turma")["Score"].mean().sort_values(ascending=False).reset_index())
-    fig = px.bar(
-        por_turma,
-        x="Turma",
-        y="Score",
-        color="Score",
-        color_continuous_scale="RdYlGn",
-        text_auto=".2f",
-        title="Comparativo de Engajamento"
-    )
-    fig.update_yaxes(range=[0, 3.2])
-    fig.update_layout(
-        dragmode="pan"
-    )
+    # Comparativo -> Barras (Gráfico 2)
     
+    fig = grafico_por_turma(df_filtrado)
     st.subheader("Comparativo entre turmas")
     st.plotly_chart(fig, width="stretch")
 
