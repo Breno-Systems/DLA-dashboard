@@ -1,5 +1,6 @@
 import plotly.express as px
 import streamlit as st
+import pandas as pd
 
 def grafico_evolucao(df):
     evolucao = df.groupby(pd.Grouper(key="Data", freq="W"))["Score"].mean().reset_index()
