@@ -19,7 +19,7 @@ def grafico_evolucao(df):
 
 def grafico_por_dia(df):
     por_dia = (
-        df_filtrado.groupby("Dia da Semana")["Score"]
+        df.groupby("Dia da Semana")["Score"]
         .mean()
         .reindex(["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"])
         .dropna()
@@ -40,7 +40,7 @@ def grafico_por_dia(df):
     return fig
 
 def grafico_por_turma(df):
-    por_turma = (df_filtrado.groupby("Turma")["Score"].mean().sort_values(ascending=False).reset_index())
+    por_turma = (df.groupby("Turma")["Score"].mean().sort_values(ascending=False).reset_index())
     fig = px.bar(
         por_turma,
         x="Turma",
