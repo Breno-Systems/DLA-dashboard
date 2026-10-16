@@ -71,7 +71,7 @@ st.divider()
 
 col1, col2, col3, col4 = st.columns(4)
 
-col1.metric("Engajamento Médio", round(df_filtrado["Score"].mean(), 2), delta=f"{calcular_insight_engajamento():.1f}%")
+col1.metric("Engajamento Médio", round(df_filtrado["Score"].mean(), 2), delta=f"{calcular_insight_engajamento(df_filtrado):.1f}%")
 
 if data_inicio <= descobrir_hoje() <= data_fim:
     col2.metric("Respostas hoje", calcular_respostas_hoje(df_filtrado), delta=f"Total no período: {len(df_filtrado)}", delta_color = "off", delta_arrow = "off")
