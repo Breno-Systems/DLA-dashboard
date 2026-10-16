@@ -1,6 +1,7 @@
 import streamlit as st
 from utils.dados import obter_dados, colorir_engajamento, calcular_insight
 from utils.graficos import grafico_evolucao, grafico_por_dia, grafico_por_turma
+import pandas as pd
 
 st.set_page_config(
     page_title="Dashboard de Engajamento",
@@ -87,9 +88,14 @@ else:
 col1.metric("Engajamento Médio", round(df_filtrado["Score"].mean(), 2), delta=f"{insight_engajamento:.1f}%")
 
 ultimo_dia = df_filtrado["Data"].max().date()
-respostas_hoje = (df_filtrado["Data"].dt.date == ultimo_dia).sum()
-col2.metric("Total de respostas", len(df_filtrado), delta=f"Respostas no dia final do filtro: {respostas_hoje}")
+hoje = pd.Timestamp.today().date()
+respostas_ultimo_dia = (df_filtrado["Data"].dt.date == ultimo_dia).sum()
+respostas_hoje = (df_filtrado["Data"].dt.date == hoje).sum()
 
+if data_inicio <= hoje <= data_fim:
+    col2.metric("Respostas hoje", respostas_hoje, delta=f"Total no período: {len(df_filtrado)}", delfa_color = "off")
+else: 
+    col2.metric("Respostas no último dia com dados", respostas_ultimo_dia, delta=f"Total no período: {len(df_filtrado)}", delfa_color = "off")
 
 col3.metric("Turmas avaliadas", df_filtrado["Turma"].nunique())
 
