@@ -79,12 +79,18 @@ if meio == 0 or len(df_ord) - meio == 0:
     insight = 0
 else:
     media_antiga = df_ord.iloc[:meio]["Score"].mean()
-    media_atual = df_ord.iloc[meio:]["Score"].mean() 
-    insight = calcular_insight(media_antiga, media_atual, "porcentagem")
-col1.metric("Engajamento Médio", round(df_filtrado["Score"].mean(), 2), delta=f"{insight:.1f}%")
+    media_atual = df_ord.iloc[meio:]["Score"].mean()
+
+    respostas_anterior = len(df_ord.iloc[:meio])
+    respostas_atual = len(df_ord.iloc[meio:])
+
+    insight_engajamento = calcular_insight(media_antiga, media_atual, "porcentagem")
+    insight_respostas = calcular_insight(respostas_anterior, respostas_atual, "diferenca")
+
+col1.metric("Engajamento Médio", round(df_filtrado["Score"].mean(), 2), delta=f"{insight_engajamento:.1f}%")
 
 
-col2.metric("Total de respostas", len(df_filtrado))
+col2.metric("Total de respostas", len(df_filtrado), delta=f"{insight_respostas}")
 
 
 col3.metric("Turmas avaliadas", df_filtrado["Turma"].nunique())
