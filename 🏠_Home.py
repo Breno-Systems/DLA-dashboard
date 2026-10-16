@@ -1,5 +1,5 @@
 import streamlit as st
-from utils.dados import obter_dados, colorir_engajamento, calcular_insight, colorir_insight
+from utils.dados import obter_dados, colorir_engajamento, calcular_insight
 from utils.graficos import grafico_evolucao, grafico_por_dia, grafico_por_turma
 
 st.set_page_config(
