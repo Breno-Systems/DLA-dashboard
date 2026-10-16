@@ -1,7 +1,6 @@
 import streamlit as st
-from utils.dados import obter_dados, colorir_engajamento, calcular_insight, calcular_respostas_hoje, calcular_respostas_ultimo_dia, descobrir_hoje
+from utils.dados import obter_dados, colorir_engajamento, calcular_insight_engajamento, calcular_respostas_hoje, calcular_respostas_ultimo_dia, descobrir_hoje
 from utils.graficos import grafico_evolucao, grafico_por_dia, grafico_por_turma
-import pandas as pd
 
 st.set_page_config(
     page_title="Dashboard de Engajamento",
@@ -72,29 +71,12 @@ st.divider()
 
 col1, col2, col3, col4 = st.columns(4)
 
-df_ord = df_filtrado.sort_values("Data")
-
-meio = len(df_ord) // 2
-
-if meio == 0 or len(df_ord) - meio == 0:
-    insight = 0
-else:
-    media_antiga = df_ord.iloc[:meio]["Score"].mean()
-    media_atual = df_ord.iloc[meio:]["Score"].mean()
-
-    insight_engajamento = calcular_insight(media_antiga, media_atual, "porcentagem")
-
-
-col1.metric("Engajamento Médio", round(df_filtrado["Score"].mean(), 2), delta=f"{insight_engajamento:.1f}%")
-
-
-respostas_ultimo_dia = calcular_respostas_ultimo_dia(df_filtrado)
-respostas_hoje = calcular_respostas_hoje(df_filtrado)
+col1.metric("Engajamento Médio", round(df_filtrado["Score"].mean(), 2), delta=f"{calcular_insight_engajamento():.1f}%")
 
 if data_inicio <= descobrir_hoje() <= data_fim:
-    col2.metric("Respostas hoje", respostas_hoje, delta=f"Total no período: {len(df_filtrado)}", delta_color = "off", delta_arrow = "off")
+    col2.metric("Respostas hoje", calcular_respostas_hoje(df_filtrado), delta=f"Total no período: {len(df_filtrado)}", delta_color = "off", delta_arrow = "off")
 else: 
-    col2.metric("Respostas no último dia com dados", respostas_ultimo_dia, delta=f"Total no período: {len(df_filtrado)}", delta_color = "off", delta_arrow = "off")
+    col2.metric("Respostas no último dia com dados", calcular_respostas_ultimo_dia(df_filtrado), delta=f"Total no período: {len(df_filtrado)}", delta_color = "off", delta_arrow = "off")
 
 col3.metric("Turmas avaliadas", df_filtrado["Turma"].nunique())
 

@@ -78,8 +78,22 @@ def calcular_insight(valor_anterior, valor_atual, tipo):
         if valor_anterior == 0:
             return "Sem valor inicial para comparar"
         insight = (valor_atual-valor_anterior)/valor_anterior * 100
-
     return insight
+
+def calcular_insight_engajamento(df):
+    df_ord = df.sort_values("Data")
+    
+    meio = len(df_ord) // 2
+    
+    if meio == 0 or len(df_ord) - meio == 0:
+        insight_engajamento = 0
+    else:
+        media_antiga = df_ord.iloc[:meio]["Score"].mean()
+        media_atual = df_ord.iloc[meio:]["Score"].mean()
+    
+        insight_engajamento = calcular_insight(media_antiga, media_atual, "porcentagem")
+
+    return insight_engajamento
 
 def descobrir_hoje():
     hoje = pd.Timestamp.today().date()
