@@ -1,5 +1,5 @@
 import streamlit as st
-from utils.dados import obter_dados, colorir_engajamento
+from utils.dados import obter_dados, colorir_engajamento, calcular_insight_engajamento, calcular_respostas_hoje, calcular_respostas_ultimo_dia, descobrir_hoje
 from utils.graficos import grafico_evolucao, grafico_por_dia, grafico_por_aula
 
 st.set_page_config(
@@ -36,8 +36,8 @@ st.divider()
 # -------------------- MÉTRICAS --------------------
 
 col1, col2, col3, col4 = st.columns(4)
-col1.metric("Engajamento Médio", round(df_turma["Score"].mean(), 2))
-col2.metric("Total de respostas", len(df_turma))
+col1.metric("Engajamento Médio", round(df_turma["Score"].mean(), 2), delta=f"{calcular_insight_engajamento(df_turma):.1f}%")
+col2.metric("Respostas hoje", calcular_respostas_hoje(df_turma), delta=f"Total no período: {len(df_turma)}", delta_color = "off", delta_arrow = "off")
 col3.metric("Aulas avaliadas", df_turma["Aulas"].nunique())
 col4.metric("Última atualização", df_turma["Data"].max().strftime("%d/%m/%Y"))
 
