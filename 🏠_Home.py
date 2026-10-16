@@ -93,9 +93,9 @@ respostas_ultimo_dia = (df_filtrado["Data"].dt.date == ultimo_dia).sum()
 respostas_hoje = (df_filtrado["Data"].dt.date == hoje).sum()
 
 if data_inicio <= hoje <= data_fim:
-    col2.metric("Respostas hoje", respostas_hoje, delta=f"Total no período: {len(df_filtrado)}", delfa_color = "off")
+    col2.metric("Respostas hoje", respostas_hoje, delta=f"Total no período: {len(df_filtrado)}", delta_color = "off")
 else: 
-    col2.metric("Respostas no último dia com dados", respostas_ultimo_dia, delta=f"Total no período: {len(df_filtrado)}", delfa_color = "off")
+    col2.metric("Respostas no último dia com dados", respostas_ultimo_dia, delta=f"Total no período: {len(df_filtrado)}", delta_color = "off")
 
 col3.metric("Turmas avaliadas", df_filtrado["Turma"].nunique())
 
