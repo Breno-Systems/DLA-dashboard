@@ -1,5 +1,5 @@
 import streamlit as st
-from utils.dados import obter_dados, colorir_engajamento, calcular_insight
+from utils.dados import obter_dados, colorir_engajamento, calcular_insight, calcular_respostas_hoje, calcular_respostas_ultimo_dia, descobrir_hoje
 from utils.graficos import grafico_evolucao, grafico_por_dia, grafico_por_turma
 import pandas as pd
 
@@ -87,12 +87,11 @@ else:
 
 col1.metric("Engajamento Médio", round(df_filtrado["Score"].mean(), 2), delta=f"{insight_engajamento:.1f}%")
 
-ultimo_dia = df_filtrado["Data"].max().date()
-hoje = pd.Timestamp.today().date()
-respostas_ultimo_dia = (df_filtrado["Data"].dt.date == ultimo_dia).sum()
-respostas_hoje = (df_filtrado["Data"].dt.date == hoje).sum()
 
-if data_inicio <= hoje <= data_fim:
+respostas_ultimo_dia = calcular_respostas_ultimo_dia(df_filtrado)
+respostas_hoje = calcular_respostas_hoje(df_filtrado)
+
+if data_inicio <= descobrir_hoje() <= data_fim:
     col2.metric("Respostas hoje", respostas_hoje, delta=f"Total no período: {len(df_filtrado)}", delta_color = "off", delta_arrow = "off")
 else: 
     col2.metric("Respostas no último dia com dados", respostas_ultimo_dia, delta=f"Total no período: {len(df_filtrado)}", delta_color = "off", delta_arrow = "off")

@@ -81,6 +81,20 @@ def calcular_insight(valor_anterior, valor_atual, tipo):
 
     return insight
 
+def descobrir_hoje():
+    hoje = pd.Timestamp.today().date()
+    return hoje
+
+def calcular_respostas_hoje(df):
+    hoje = descobrir_hoje()
+    respostas_hoje = (df["Data"].dt.date == hoje).sum()
+    return respostas_hoje
+
+def calcular_respostas_ultimo_dia(df):
+    ultimo_dia = df["Data"].max().date()
+    respostas_ultimo_dia = (df["Data"].dt.date == ultimo_dia).sum()
+    return respostas_ultimo_dia
+
 # ---------- UTILITÁRIOS DE VISUAL ----------
 def colorir_engajamento(nota):
     cores = {
