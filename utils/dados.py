@@ -70,6 +70,16 @@ def obter_dados():
         df = carregar_dados()
         return tratar(df)
 
+def calcular_insight(valor_anterior, valor_atual, tipo):
+    # "porcentagem" compara a variação com o valor inicial; "diferenca" retorna a variação absoluta.
+    if tipo == "diferenca":
+        insight = valor_atual - valor_anterior
+    elif tipo == "porcentagem":
+        if valor_anterior == 0:
+            return "Sem valor inicial para comparar"
+        insight = (valor_atual-valor_anterior)/valor_anterior * 100
+
+    return insight
 
 # ---------- UTILITÁRIOS DE VISUAL ----------
 def colorir_engajamento(nota):

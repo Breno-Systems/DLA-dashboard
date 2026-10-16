@@ -1,5 +1,5 @@
 import streamlit as st
-from utils.dados import obter_dados, colorir_engajamento
+from utils.dados import obter_dados, colorir_engajamento, calcular_insight, colorir_insight
 from utils.graficos import grafico_evolucao, grafico_por_dia, grafico_por_turma
 
 st.set_page_config(
@@ -39,7 +39,7 @@ with st.sidebar:
         data_min = data_min - timedelta(days=1)
         data_max = data_max + timedelta(days=1)
 
-    inicio, fim = st.slider(
+    data_inicio, data_fim = st.slider(
         "Periodo",
         value=(data_min, data_max),
         min_value=data_min,
@@ -49,11 +49,11 @@ with st.sidebar:
 
 if turmas_sel: 
     df_filtrado = df[
-        (df["Turma"].isin(turmas_sel)) & (df["Data"].dt.date >= inicio) & (df["Data"].dt.date <= fim)
+        (df["Turma"].isin(turmas_sel)) & (df["Data"].dt.date >= data_inicio) & (df["Data"].dt.date <= data_fim)
     ]
 else:
     df_filtrado = df[
-        (df["Data"].dt.date >= inicio) & (df["Data"].dt.date <= fim)
+        (df["Data"].dt.date >= data_inicio) & (df["Data"].dt.date <= data_fim)
     ]
 
 if df_filtrado.empty:
@@ -70,9 +70,26 @@ st.caption(caption)
 st.divider()
 
 col1, col2, col3, col4 = st.columns(4)
-col1.metric("Engajamento Médio", round(df_filtrado["Score"].mean(), 2))
+
+df_ord = df_filtrado.sort_values("Data")
+
+meio = len(df_ord) // 2
+
+if meio == 0 or len(df_ord) - meio == 0:
+    insight = 0
+else:
+    media_antiga = df_ord.iloc[:meio]["Score"].mean()
+    media_atual = df_ord.iloc[meio:]["Score"].mean() 
+    insight = calcular_insight(media_antiga, media_atual, "porcentagem")
+col1.metric("Engajamento Médio", round(df_filtrado["Score"].mean(), 2), delta=f"{insight:.1f}%")
+
+
 col2.metric("Total de respostas", len(df_filtrado))
+
+
 col3.metric("Turmas avaliadas", df_filtrado["Turma"].nunique())
+
+
 col4.metric("Última atualização", df_filtrado["Data"].max().strftime("%d/%m/%Y"))
 
 st.divider()
@@ -110,7 +127,7 @@ with st.expander ("📋 Ver dados brutos"):
     df_view = df_filtrado.sort_values("Data", ascending=False).copy()
     df_view["Data"] = df_view["Data"].dt.strftime("%d/%m/%Y")
     df_view = df_view.reset_index(drop=True)
-    styled = (df_view.style.map(colorir_engajamento, subset=["Engajamento"]).hide(axis="index"))
+    styled = df_view.style.map(colorir_engajamento, subset=["Engajamento"]).hide(axis="index")
     st.dataframe(
         styled,
         height=300
